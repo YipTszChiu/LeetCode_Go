@@ -9,6 +9,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+//递归法
 func buildTree(preorder []int, inorder []int) *TreeNode {
 	//空值处理
 	if len(preorder) == 0 || len(inorder) == 0 {
@@ -37,5 +38,53 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 	//右边为右子树的内容，即inorder[inorderIndex+1:]；而对preorder来说，等于上一步中preorder剩下的部分
 	root.Right = buildTree(preorder[len(inorder[:inorderIndex])+1:], inorder[inorderIndex+1:])
 
+	return root
+}
+
+//迭代法
+func buildTree2(preorder []int, inorder []int) *TreeNode {
+	//空值处理
+	if len(preorder) == 0 || len(inorder) == 0 {
+		return nil
+	}
+
+	//构造树根
+	root := &TreeNode{
+		preorder[0],
+		nil,
+		nil,
+	}
+
+	//构造一个存储TreeNode的栈，并将树根入栈
+	stack := []*TreeNode{root}
+	//用于中序遍历的指针
+	inorderIndex := 0
+
+	for i := 1; i < len(preorder); i++ {
+		//记录当前先序遍历的值
+		preorderVal := preorder[i]
+		//获取栈顶的元素
+		node := stack[len(stack)-1]
+		//如果栈顶元素不等于中序遍历指针指向的值
+		if node.Val != inorder[inorderIndex] {
+			//先序遍历的值为栈顶元素的左节点
+			node.Left = &TreeNode{preorderVal, nil, nil}
+			//新建的节点入栈
+			stack = append(stack, node.Left)
+		} else {
+			//如果栈顶元素等于中序遍历指针指向的值（注意溢出）
+			for len(stack) != 0 && stack[len(stack)-1].Val == inorder[inorderIndex] {
+				//栈顶出栈
+				node = stack[len(stack)-1]
+				stack = stack[:len(stack)-1]
+				//指针后移
+				inorderIndex++
+			}
+			//找到出栈节点不等于中序遍历指针指向值的一位，preorderVal即为这个节点的右节点
+			node.Right = &TreeNode{preorderVal, nil, nil}
+			//新建的节点入栈
+			stack = append(stack, node.Right)
+		}
+	}
 	return root
 }
