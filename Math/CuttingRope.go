@@ -59,3 +59,41 @@ func max(i, j int) int {
 	}
 	return j
 }
+
+// 剑指 Offer 14- II. 剪绳子 II
+// https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/
+func cuttingRope3(n int) int {
+	// 题目条件 n >= 2
+	if n <= 3 {
+		return n - 1
+	}
+	// a 为 n 除以 3 的商，b 为 n 除以 3 的余数
+	a, b := n/3, n%3
+	// 余数为0，整除3说明可以均分为3的线段
+	if b == 0 {
+		return pow(3, a) % (1e9 + 7)
+	}
+	// 余数为1，有一段需要拆分成2+2
+	if b == 1 {
+		return pow(3, a-1) * 4 % (1e9 + 7)
+	}
+	// 余数为2，保留剩下这段2
+	return pow(3, a) * 2 % (1e9 + 7)
+}
+
+// 由于题目要求余1e9+7，说明是比较大的数，需要使用快速幂
+func pow(x, n int) int {
+	if n == 0 {
+		return 1
+	}
+	if n == 1 {
+		return x
+	}
+
+	temp := pow(x, n/2)
+	if n%2 == 1 {
+		return temp * temp * x % (1e9 + 7)
+	} else {
+		return temp * temp % (1e9 + 7)
+	}
+}
