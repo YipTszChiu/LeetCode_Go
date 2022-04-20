@@ -14,7 +14,7 @@ func validateStackSequences(pushed []int, popped []int) bool {
 	for _, val := range pushed {
 		temp = append(temp, val)
 		// 判断栈顶元素与popped序列是否一致，如果是则出栈
-		for temp[len(temp)-1] == popped[i] && len(temp) > 0 {
+		for len(temp) > 0 && temp[len(temp)-1] == popped[i] {
 			i++
 			temp = temp[:len(temp)-1]
 		}
