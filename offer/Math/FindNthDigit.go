@@ -15,7 +15,7 @@ func findNthDigit(n int) int {
 		n -= count
 		// n 属于下一个范围，因此digit++
 		digit++
-		// start 为每个范围起始数字，如1，10，100
+		// start 为每个范围起始数字，如1，10，100HotTopic
 		start *= 10
 		// count 推算公式为 digit * start * 9，如 10~99的count = 2 * 10 * 9 = 180
 		count = digit * start * 9
