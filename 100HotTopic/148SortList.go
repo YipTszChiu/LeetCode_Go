@@ -115,5 +115,5 @@ func sortList2(head *ListNode) *ListNode {
 			cur = next
 		}
 	}
-	return dummyHead
+	return dummyHead.Next
 }
