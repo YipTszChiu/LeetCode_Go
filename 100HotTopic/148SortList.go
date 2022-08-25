@@ -69,3 +69,51 @@ func sortList(head *ListNode) *ListNode {
 }
 
 // 自底向上归并排序
+func sortList2(head *ListNode) *ListNode {
+	if head == nil {
+		return head
+	}
+	// 记录链表的长度
+	length := 0
+	for node := head; node != nil; node = node.Next {
+		length++
+	}
+
+	dummyHead := &ListNode{Next: head}
+	// 自底向上：子链从 1 开始，每次翻倍
+	for subLength := 1; subLength < length; subLength <<= 1 {
+		prev, cur := dummyHead, dummyHead.Next
+		// 按照 subLength 的长度从头到位进行归并
+		for cur != nil {
+			// 选取subLength个元素为第一个链
+			head1 := cur
+			for i := 1; i < subLength && cur.Next != nil; i++ {
+				cur = cur.Next
+			}
+			// 第二个链头为上面遍历结束的下一个节点
+			head2 := cur.Next
+			// 断开两个子链
+			cur.Next = nil
+			// 选取subLength个元素为第二个链
+			cur = head2
+			for i := 1; i < subLength && cur != nil && cur.Next != nil; i++ {
+				cur = cur.Next
+			}
+			// 断开第二个子链以及后面未划分的链
+			var next *ListNode
+			if cur != nil {
+				next = cur.Next
+				cur.Next = nil
+			}
+			// 合并两个有序链表
+			prev.Next = mergeList(head1, head2)
+			// 合并结束，将 prev 指针指向已经归并完的链的末尾
+			for prev.Next != nil {
+				prev = prev.Next
+			}
+			// cur 指向未归并的链准备下一次归并
+			cur = next
+		}
+	}
+	return dummyHead
+}
