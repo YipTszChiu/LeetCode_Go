@@ -33,7 +33,10 @@ func maxProduct(nums []int) int {
 }
 
 // 空间优化
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
 func maxProduct2(nums []int) int {
+	// 发现计算过程中maxMul以及minMul仅与i-1位有关，因此只用一个变量存储，无需用完整数组
 	length := len(nums)
 	// 初始化最大乘积和最小乘积两个数组
 	maxMul, minMul, res := nums[0], nums[0], nums[0]
