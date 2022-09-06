@@ -13,7 +13,7 @@ type MinStack struct {
 }
 
 // 构造器
-func Constructor() MinStack {
+func Constructor_MinStack() MinStack {
 	return MinStack{
 		stack: []int{},
 		// 初始化时 minStack 栈底存一个最大的整数，便于函数处理
