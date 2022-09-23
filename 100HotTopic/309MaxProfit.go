@@ -29,9 +29,9 @@ func maxProfit_309(prices []int) int {
 	return max(dp[length-1][1], dp[length-1][2])
 }
 
-func max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
+//func max(x, y int) int {
+//	if x > y {
+//		return x
+//	}
+//	return y
+//}
