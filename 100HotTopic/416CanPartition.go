@@ -1,5 +1,8 @@
 package _00HotTopic
 
+// 416. 分割等和子集
+// https://leetcode.cn/problems/partition-equal-subset-sum/?favorite=2cktkvj
+
 func canPartition(nums []int) bool {
 	n := len(nums)
 	// 数组元素少于2无法分割成两半
