@@ -17,14 +17,14 @@ package _00HotTopic
 // 空间复杂度：O(N) 栈空间
 func rootSum(root *TreeNode, targetSum int) (res int) {
 	if root == nil {
-		return 0
+		return
 	}
 	val := root.Val
 	if val == targetSum {
 		res++
 	}
 	res += rootSum(root.Left, targetSum-val)
-	res += rootSum(root.Left, targetSum-val)
+	res += rootSum(root.Right, targetSum-val)
 	return
 }
 
