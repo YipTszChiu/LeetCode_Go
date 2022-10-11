@@ -12,6 +12,9 @@ package _00HotTopic
  * }
  */
 
+// 通过计算树高的同时计算路径长
+// 时间复杂度：O(n) 需要遍历每个节点一次
+// 空间复杂度：O(height) 递归栈取决于树高
 func diameterOfBinaryTree(root *TreeNode) int {
 	if root == nil {
 		return 0
