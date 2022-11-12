@@ -38,3 +38,36 @@ func threeSum(nums []int) [][]int {
 	}
 	return res
 }
+
+// 第一次复习
+func threeSum1(nums []int) [][]int {
+	length := len(nums)
+	res := make([][]int, 0)
+	// 对数组进行排序
+	sort.Ints(nums)
+
+	for first := 0; first < length; first++ {
+		// 不能有相同序列，碰到一样的数需要跳过
+		if first > 0 && nums[first-1] == nums[first] {
+			continue
+		}
+		third := length - 1
+		target := -1 * nums[first]
+		for second := first + 1; second < length; second++ {
+			if second > first+1 && nums[second-1] == nums[second] {
+				continue
+			}
+			for third > second && nums[second]+nums[third] > target {
+				third--
+			}
+			if second == third {
+				break
+			}
+			if nums[second]+nums[third] == target {
+				res = append(res, []int{nums[first], nums[second], nums[third]})
+			}
+		}
+	}
+
+	return res
+}

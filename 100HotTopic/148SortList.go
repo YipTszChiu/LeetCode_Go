@@ -39,7 +39,7 @@ func mergeList(head1, head2 *ListNode) *ListNode {
 }
 
 // 通过递归法，从中间点分成两个链表归并排序
-func sort(head, tail *ListNode) *ListNode {
+func sort148(head, tail *ListNode) *ListNode {
 	if head == nil {
 		return head
 	}
@@ -61,11 +61,11 @@ func sort(head, tail *ListNode) *ListNode {
 	// 遍历结束时 slow即为链表中点
 	mid := slow
 	// 归并排序：注意这里 mid
-	return mergeList(sort(head, mid), sort(mid, tail))
+	return mergeList(sort148(head, mid), sort148(mid, tail))
 }
 
 func sortList(head *ListNode) *ListNode {
-	return sort(head, nil)
+	return sort148(head, nil)
 }
 
 // 自底向上归并排序

@@ -12,7 +12,7 @@ import "container/heap"
 //		return nil
 //	}
 //	//对arr进行排序
-//	sort.Ints(arr)
+//	mySort.Ints(arr)
 //	//res用于返回结果
 //	res := []int{}
 //	//遍历排序后的arr将最小的k个数加入到res
@@ -23,8 +23,8 @@ import "container/heap"
 //	return res
 //}
 
-//法二：大根堆维护k个数
-//使用heap需要实现Len(),Less(),Swap(),Push(),Pop()
+// 法二：大根堆维护k个数
+// 使用heap需要实现Len(),Less(),Swap(),Push(),Pop()
 type maxHeap []int
 
 func (m *maxHeap) Len() int {
@@ -48,7 +48,7 @@ func (m *maxHeap) Pop() (x interface{}) {
 	return
 }
 
-//Peek用于查看堆顶
+// Peek用于查看堆顶
 func (m *maxHeap) Peek() interface{} {
 	return (*m)[0]
 }

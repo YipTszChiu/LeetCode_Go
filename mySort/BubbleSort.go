@@ -1,4 +1,4 @@
-package sort
+package mySort
 
 // 时间复杂度：O(n) - O(n^2) 平均 O(n^2)
 // 空间复杂度：O(1)
